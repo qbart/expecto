@@ -1,5 +1,7 @@
 # expecto
 
+![example spec](https://github.com/user-attachments/assets/f7e4a512-59d4-4aa7-abd2-6d509b56a74a)
+
 ## Matchers
 
 ```go
