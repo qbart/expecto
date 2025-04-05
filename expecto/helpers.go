@@ -35,6 +35,15 @@ func (s *Assert) Nil(msg string, value any) {
 	}
 }
 
+func (s *Assert) NotNil(msg string, value any) {
+	reflectValue := reflect.ValueOf(value)
+	if reflectValue.IsNil() {
+		s.t.Logf("  %s:", msg)
+		s.t.Logf("     got: \033[0;31m%v\033[0m", value)
+		s.t.Fatalf("Value is nil")
+	}
+}
+
 func (s *Assert) NoErr(msg string, err error) {
 	if err != nil {
 		s.t.Logf("  %s:", msg)
