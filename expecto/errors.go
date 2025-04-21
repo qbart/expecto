@@ -2,31 +2,32 @@ package expecto
 
 import (
 	"strings"
+	"testing"
 )
 
-func (s *Assert) NoErr(msg string, err error) {
+func NoErr(t *testing.T, msg string, err error) {
 	if err != nil {
-		s.t.Logf("  %s:", msg)
-		s.t.Logf("     got: \033[0;31m%v\033[0m", err)
-		s.t.Fatalf("Error occurred")
+		t.Logf("  %s:", msg)
+		t.Logf("     got: \033[0;31m%v\033[0m", err)
+		t.Fatalf("Error occurred")
 	}
 }
 
-func (s *Assert) Err(msg string, err error) {
+func Err(t *testing.T, msg string, err error) {
 	if err == nil {
-		s.t.Logf("  %s:", msg)
-		s.t.Logf("     got: \033[0;31m%v\033[0m", err)
-		s.t.Fatalf("Expected error")
+		t.Logf("  %s:", msg)
+		t.Logf("     got: \033[0;31m%v\033[0m", err)
+		t.Fatalf("Expected error")
 	}
 }
 
-func (s *Assert) ErrContains(msg string, err error, substr string) {
-	s.Err(msg, err)
+func ErrContains(t *testing.T, msg string, err error, substr string) {
+	Err(t, msg, err)
 
 	if !strings.Contains(err.Error(), substr) {
-		s.t.Logf("  %s:", msg)
-		s.t.Logf("    want: \033[0;32m%v\033[0m", substr)
-		s.t.Logf("     got: \033[0;31m%v\033[0m", err)
-		s.t.Fatalf("Expected error containing %s", substr)
+		t.Logf("  %s:", msg)
+		t.Logf("    want: \033[0;32m%v\033[0m", substr)
+		t.Logf("     got: \033[0;31m%v\033[0m", err)
+		t.Fatalf("Expected error containing %s", substr)
 	}
 }
